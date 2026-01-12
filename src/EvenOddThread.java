@@ -1,12 +1,33 @@
+// এই ক্লাসের কাজ হলো: ১ থেকে ১০ (বা যত পর্যন্ত চাই) পর্যন্ত নাম্বার প্রিন্ট করা
+// কিন্তু দুটি আলাদা থ্রেড ব্যবহার করে:
+// একটা থ্রেড শুধু Odd (বিজোড়) নাম্বার প্রিন্ট করবে
+// আরেকটা থ্রেড শুধু Even (জোড়) নাম্বার প্রিন্ট করবে
 public class EvenOddThread {
+
     public static void main(String[] args) {
 
+        // NumberPrinter ক্লাসের একটা অবজেক্ট তৈরি করা হলো
+        // এই অবজেক্ট দুই থ্রেডই শেয়ার করবে (shared resource)
         NumberPrinter printer = new NumberPrinter();
 
-        Thread oddThread = new Thread(() -> printer.printOdd());
-        Thread evenThread = new Thread(() -> printer.printEven());
+        // ---------------- থ্রেড-১: Odd নাম্বার প্রিন্ট করার জন্য ----------------
+        // Lambda expression ব্যবহার করে Runnable তৈরি করা হয়েছে
+        Thread oddThread = new Thread(() -> {
+            printer.printOdd();     // এই মেথডে শুধু বিজোড় সংখ্যা প্রিন্ট হবে
+        });
 
+        // ---------------- থ্রেড-২: Even নাম্বার প্রিন্ট করার জন্য ----------------
+        Thread evenThread = new Thread(() -> {
+            printer.printEven();    // এই মেথডে শুধু জোড় সংখ্যা প্রিন্ট হবে
+        });
+
+        // দুটি থ্রেডই শুরু করে দেওয়া হলো
         oddThread.start();
         evenThread.start();
+
+        // মনে রাখা জরুরি:
+        // এই কোডে কোনো synchronization নেই
+        // তাই প্রিন্টের ক্রম ঠিক থাকবে না → 1,2,3,4,... এভাবে আসবে না
+        // বরং এলোমেলো আসবে (যেমন: 1, 3, 2, 5, 4, 7 ...)
     }
 }
