@@ -1,16 +1,35 @@
 public class MaxMinArray {
     public static void main(String[] args) {
+        
+        // একটা integer অ্যারে তৈরি করা হয়েছে (এখানে ৫টা সংখ্যা আছে)
         int[] arr = {5, 3, 9, 1, 6};
-
-        int max = arr[0];
-        int min = arr[0];
-
+        
+        // শুরুতে প্রথম সংখ্যাটাকেই সবচেয়ে বড় এবং সবচেয়ে ছোট ধরে নিচ্ছি
+        // এটা একটা খুব গুরুত্বপূর্ণ ধাপ — কারণ লুপ চালানোর আগে কোনো মান থাকতে হবে
+        int max = arr[0];   // প্রথমে max = 5
+        int min = arr[0];   // প্রথমে min = 5
+        
+        // enhanced for loop (for-each loop) → অ্যারের প্রতিটি উপাদান নিয়ে কাজ করবে
+        // num এর মধ্যে এক এক করে 5, 3, 9, 1, 6 আসবে
         for (int num : arr) {
-            if (num > max) max = num;
-            if (num < min) min = num;
+            
+            // যদি বর্তমান সংখ্যা max-এর চেয়ে বড় হয় → max আপডেট করো
+            if (num > max) {
+                max = num;      // উদাহরণ: num=9 হলে max=9 হয়ে যাবে
+            }
+            
+            // যদি বর্তমান সংখ্যা min-এর চেয়ে ছোট হয় → min আপডেট করো
+            if (num < min) {
+                min = num;      // উদাহরণ: num=1 হলে min=1 হয়ে যাবে
+            }
         }
-
-        System.out.println("Max: " + max);
-        System.out.println("Min: " + min);
+        
+        // লুপ শেষ হওয়ার পর max ও min-এ সঠিক মান থাকবে
+        System.out.println("সবচেয়ে বড় সংখ্যা (Max)  = " + max);
+        System.out.println("সবচেয়ে ছোট সংখ্যা (Min) = " + min);
+        
+        // আউটপুট হবে:
+        // সবচেয়ে বড় সংখ্যা (Max)  = 9
+        // সবচেয়ে ছোট সংখ্যা (Min) = 1
     }
 }
